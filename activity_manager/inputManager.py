@@ -32,5 +32,6 @@ class InputManager(object):
       "status":  status,
       "start":   start,
       "stop":    stop,
-      "company": comp
+      "company": comp,
+      "minutes": None
     }

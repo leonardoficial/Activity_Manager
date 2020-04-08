@@ -22,6 +22,8 @@ class Main(object):
     # CURRENT TIME
     self.datetime = datetime.today().strftime("%d-%m-%Y")
     
+    self.calculate()
+    
   
   # PRINT SYSTEM DATA
   def test(self):
@@ -36,11 +38,33 @@ class Main(object):
       "time": time
     })
   
+  # CALCULATE ACTIVITY TIME IN MINUTES
+  def calculate(self):
+    activities = self.database["activities"]
+    
+    for activity in activities:
+    
+      # IF ITS NOT DONE, SKIP
+      if activity["status"] == "PEND":
+        continue
+    
+      start = datetime.strptime(activity["start"], "%H:%M")
+      stop  = datetime.strptime(activity["stop"],  "%H:%M")
+      
+      # UPDATE EACH ACTICITY WITH ITS WORK TIME  
+      activity["minutes"] = ( (abs(stop - start)).seconds / 60 )
+      
+  
   # ADD NEW ACTIVITY
   def add_activity(self):
-    activity = self.sysinput.get_activity()
+    activities = self.database["activities"]
+    activity   = self.sysinput.get_activity()
     
-    self.database["activities"].append(activity)
+    activity.update({
+      "id": len(activities) + 1
+    })
+    
+    activities.append(activity)
   
   # CHANGE EXISTING ACTIVITY
   def update_activity(self, activity_id, key, value):
@@ -49,6 +73,11 @@ class Main(object):
     for activity in activities:
       if activity["id"] == activity_id:
         activity[key] = value
+  
+  # EXPORT DATA
+  def save_data(self):
+    with open("Export/data.json", "w", encoding="utf-8") as jsonfile:
+      json.dump(self.database, jsonfile, ensure_ascii=False, indent=4)
 
 
 
@@ -61,12 +90,11 @@ with open("data.json", "r") as jsonfile:
 main = Main(data, TemplateManager, InputManager)
 
 
-#main.add_activity()
+main.add_activity()
 
-main.build("DAILY")
+#main.build("DAILY")
 
-main.update_activity(3, "desc", "AAAAAAAA")
+#main.update_activity(3, "desc", "AAAAAAAA")
 
-main.build("DAILY")
-
+main.save_data()
 

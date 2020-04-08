@@ -1,0 +1,51 @@
+{
+    "name": "Leonardo Amaral",
+    "today": "10/02/2020",
+    "weekday": "segunda-feira",
+    "clockIn": "10:00",
+    "clockOut": "17:00",
+    "restBreakIn": "12:00",
+    "restBreakOut": "13:00",
+    "activities": [
+        {
+            "id": 1,
+            "type": "Suporte Técnico",
+            "desc": "Validadores sem comunicar",
+            "status": "OKAY",
+            "start": "11:00",
+            "stop": "11:40",
+            "company": "VNS AMPARO",
+            "minutes": 40.0
+        },
+        {
+            "id": 2,
+            "type": "Suporte Técnico",
+            "desc": "Limpar banco do RPTGAR",
+            "status": "OKAY",
+            "start": "10:00",
+            "stop": "10:20",
+            "company": "SIT MACAE",
+            "minutes": 20.0
+        },
+        {
+            "id": 3,
+            "type": "Rotina Tec Embarcada",
+            "desc": "Tratamento de 125 arquivos no TELOG",
+            "status": "OKAY",
+            "start": "14:00",
+            "stop": "15:30",
+            "company": "RCTI",
+            "minutes": 90.0
+        },
+        {
+            "type": "Homologação",
+            "desc": "Gerado VALOP",
+            "status": "PEND",
+            "start": "12:20",
+            "stop": "-",
+            "company": "Estrela",
+            "minutes": null,
+            "id": 4
+        }
+    ]
+}
