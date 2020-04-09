@@ -9,7 +9,7 @@
     "activities": [
         {
             "id": 1,
-            "type": "Suporte Técnico",
+            "type": "AAAAAAAAA",
             "desc": "Validadores sem comunicar",
             "status": "OKAY",
             "start": "11:00",
@@ -19,7 +19,7 @@
         },
         {
             "id": 2,
-            "type": "Suporte Técnico",
+            "type": "Suporte TÃ©cnico",
             "desc": "Limpar banco do RPTGAR",
             "status": "OKAY",
             "start": "10:00",
@@ -36,16 +36,6 @@
             "stop": "15:30",
             "company": "RCTI",
             "minutes": 90.0
-        },
-        {
-            "type": "Homologação",
-            "desc": "Gerado VALOP",
-            "status": "PEND",
-            "start": "12:20",
-            "stop": "-",
-            "company": "Estrela",
-            "minutes": null,
-            "id": 4
         }
     ]
 }
