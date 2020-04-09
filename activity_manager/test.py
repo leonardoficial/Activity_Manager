@@ -1,13 +1,14 @@
-import sys
+import json
 
-options = {
-    "--help":    "GET HELP",
-    "--add":     "ADD ACTIVITY",
-    "--update":  "UPDATE ACTIVITY",
-}
+from main import Main
 
-try:
-    option = options[sys.argv[1]]
-    print(option)
-except:
-    print("OPTION NOT AVAILABLE!")
+from inputManager    import InputManager
+from templateManager import TemplateManager
+
+with open("data.json", "r") as jsonfile:
+    data = json.load(jsonfile)
+
+main = Main(data, TemplateManager, InputManager)
+
+main.calculate(1)
+main.save_data()

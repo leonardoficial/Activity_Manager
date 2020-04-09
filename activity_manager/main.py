@@ -38,11 +38,11 @@ class Main(object):
   # MAIN DECORATOR
   def wrapper(func):
 
-      def wrap(self, *args, **kwargs):
-          self.clear_console()
-          func(self, *args, **kwargs)
-          self.calculate()
-      return wrap
+    def wrap(self, *args, **kwargs):
+        self.clear_console()
+        func(self, *args, **kwargs)
+        self.calculate()
+    return wrap
 
 
   # BUILD TEMPLATE
@@ -65,20 +65,30 @@ class Main(object):
     
 
   # CALCULATE ACTIVITY TIME IN MINUTES
-  def calculate(self):
+  def calculate(self, index=-1):
     activities = self.database["activities"]
-
-    for activity in activities:
-
+    arr_length = len(self.database["activities"])
+    
+    if index <= -1:
+      for x in range(arr_length):
+        self.calculate(x)
+    
+    else:
+      activity = activities[index]
+      
       # IF ITS NOT DONE, SKIP
       if activity["status"] == "PEND":
-        continue
+        return 0
 
       start = datetime.strptime(activity["start"], "%H:%M")
       stop  = datetime.strptime(activity["stop"],  "%H:%M")
 
       # UPDATE EACH ACTICITY WITH ITS WORK TIME
       activity["minutes"] = ( (abs(stop - start)).seconds / 60 )
+      
+      return activity
+
+
 
 
   # ADD NEW ACTIVITY
@@ -152,6 +162,6 @@ if __name__ == "__main__":
 
 
 #main.add_activity()
-#main.build("DAILY")
+#main.build("DIARIO")
 #main.update_activity(3, "desc", "AAAAAAAA")
 #main.save_data()
