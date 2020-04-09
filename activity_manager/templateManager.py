@@ -7,22 +7,22 @@ class TemplateManager(object):
 
     def build(self, type, activities, config):
       # TEMPLATE HEADER
-      result = TEMPLATES["DAILY"]["START"]
+      result = TEMPLATES[type]["START"]
       
       for data in activities:
         # TEMPLATE DATA
         vector =  (data["status"], data["company"], data["desc"])
-        result += TEMPLATES["DAILY"]["DATA"].format(*vector)
+        result += TEMPLATES[type]["DATA"].format(*vector)
       
       #TEMPLATE FOOTER
-      result += TEMPLATES["DAILY"]["STOP"]
+      result += TEMPLATES[type]["STOP"]
       
-      print(result)
+      return result
       
 
 
 TEMPLATES = {
-    "DAILY": {
+    "DIARIO": {
         "START": "+" + ("-" * 6) + "+" + ("-" * 44) + "+",
         "DATA":  "\n| {0} | {1} - {2}",
         "STOP":  "\n+" + ("-" * 6) + "+" + ("-" * 44) + "+",

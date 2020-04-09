@@ -29,9 +29,11 @@ class Main(object):
   def test(self):
     print(json.dumps(self.database, indent=2))
 
+
   # CLEAR CONSOLE
   def clear_console(self):
-    os.system("cls")
+    os.system("clear")
+
 
   # MAIN DECORATOR
   def wrapper(func):
@@ -39,18 +41,28 @@ class Main(object):
       def wrap(self, *args, **kwargs):
           self.clear_console()
           func(self, *args, **kwargs)
-
           self.calculate()
       return wrap
 
+
   # BUILD TEMPLATE
-  def build(self, type):
+  def build(self, type, export=False):
     time = self.datetime
     data = self.database["activities"]
 
-    self.template.build(type, data, {
+    temp = self.template.build(type, data, {
       "time": time
     })
+    
+    if export:
+      fname = "Export/{0} {1}.txt".format(type, self.database["today"])
+      with open(fname, "w", encoding="utf-8") as txtfile:
+        txtfile.write(temp)
+    else:
+      print(temp)
+
+    
+    
 
   # CALCULATE ACTIVITY TIME IN MINUTES
   def calculate(self):
@@ -92,7 +104,7 @@ class Main(object):
   # EXPORT DATA
   @wrapper
   def save_data(self):
-    with open("Export/data.json", "w", encoding="utf-8") as jsonfile:
+    with open("data.json", "w", encoding="utf-8") as jsonfile:
       json.dump(self.database, jsonfile, ensure_ascii=False, indent=4)
 
 
@@ -120,11 +132,17 @@ if __name__ == "__main__":
 
       main.update_activity(arg1, arg2, arg3)
       main.save_data()
+  
+  def option_export():
+    arg1 = str(sys.argv[2])
+    
+    main.build(arg1, True)
 
   options = {
     "--add":    option_add,
     "--help":   option_help,
     "--update": option_update,
+    "--export": option_export
   }
 
   try:

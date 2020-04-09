@@ -1,0 +1,5 @@
++------+--------------------------------------------+
+| OKAY | VNS AMPARO - VALIDADOR TECH CARD
+| OKAY | SIT MACAE - Limpar banco do RPTGAR
+| OKAY | RCTI - Tratamento de 125 arquivos no TELOG
++------+--------------------------------------------+
